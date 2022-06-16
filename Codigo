@@ -1,0 +1,32 @@
+#include <SFML/Graphics.hpp>
+int main()
+{
+    int ancho_ventana = 1300, alto_ventana = 800;    int x_coord = ancho_ventana / 2;
+    int y_coord = alto_ventana / 2;
+    sf::RenderWindow ventana(sf::VideoMode(ancho_ventana, alto_ventana), "IntellVirtual!");
+    sf::CircleShape ball(5.f);
+    ball.setFillColor(sf::Color::Yellow);
+    ball.setPosition(x_coord, y_coord);
+    while (ventana.isOpen())
+    {
+        sf::Event event;
+        while (ventana.pollEvent(event))
+        {
+            if (event.type == sf::Event::Closed)
+                ventana.close();
+        }
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+            x_coord += 1;
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+            x_coord -= 1;
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
+            y_coord -= 1;
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
+            y_coord += 1;
+        ventana.clear();
+        ball.setPosition(x_coord, y_coord); 
+        ventana.draw(ball);
+        ventana.display();
+    }
+    return 0;
+}     
